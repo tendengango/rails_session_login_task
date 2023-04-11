@@ -1,8 +1,16 @@
 class TasksController < ApplicationController
   before_action :set_task, only: %i[ show edit update destroy ]
 
+
   def index
-    @tasks = Task.all
+    #@tasks = User.all
+    @tasks = @current_user.tasks
+    @task = Task.new(:user => @current_user)
+  end
+
+  def user
+    @user = User.find( params[:user_id])
+    @tasks = Task.where(user: @user)
   end
 
   def new
@@ -11,6 +19,7 @@ class TasksController < ApplicationController
 
   def create
     @task = Task.new(task_params)
+   
     if @task.save
       redirect_to tasks_path, notice: t('.created')
     else
@@ -44,6 +53,6 @@ class TasksController < ApplicationController
     end
 
     def task_params
-      params.require(:task).permit(:title, :content)
+      params.require(:task).permit(:title, :content, :user_id)
     end
 end

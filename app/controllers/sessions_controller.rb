@@ -8,8 +8,8 @@ class SessionsController < ApplicationController
               session[:user_id] = user.id
               log_in(user) #appel de la method log_in dans le controller session
               #redirect_to tasks_path
-              redirect_to tasks_path(user.id)
-              #redirect_to user_path(user.id)
+              #redirect_to tasks_path(user.id)
+              redirect_to user_path(current_user.id)
               # ログイン成功した場合
             else
               # ログイン失敗した場合
