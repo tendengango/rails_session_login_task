@@ -1,5 +1,5 @@
 class SessionsController < ApplicationController
-    skip_before_action :login_required, only: [:new, :create]
+    skip_before_action :login_required, only: [:new, :create, :update]
       def new
       end
       def create
@@ -7,8 +7,7 @@ class SessionsController < ApplicationController
           if user&.authenticate(params[:session][:password])
               session[:user_id] = user.id
               log_in(user) #appel de la method log_in dans le controller session
-              #redirect_to tasks_path
-              #redirect_to tasks_path(user.id)
+             
               redirect_to user_path(current_user.id)
               # ログイン成功した場合
             else

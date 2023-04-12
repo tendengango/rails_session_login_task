@@ -3,9 +3,7 @@ class TasksController < ApplicationController
 
 
   def index
-    #@tasks = User.all
-    @tasks = @current_user.tasks
-    @task = Task.new(:user => @current_user)
+    @tasks = current_user.tasks
   end
 
   def user
@@ -19,7 +17,7 @@ class TasksController < ApplicationController
 
   def create
     @task = Task.new(task_params)
-   
+    @task.user = current_user
     if @task.save
       redirect_to tasks_path, notice: t('.created')
     else

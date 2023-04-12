@@ -1,2 +1,8 @@
-<h1>name: <%= @user.name %></h1>
-<p>adresse électronique: <%= @user.email %></p>
+<h3>name: <%= @user.name %></h3>
+
+<p>adresse électronique: <%= @user.email %></p> 
+
+<%= link_to t('common.edit'), edit_user_path(@user) %>
+<%= link_to t('common.destroy'), @user, method: :delete, data: { confirm: t('common.confirm_destroy') } %>
+
+
